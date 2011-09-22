@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs id="FAQ" title="Frequently Asked Questions">
+  <part id="General">
+    <faq id="question">
+      <question>Why are there no actual questions yet?</question>
+      <answer>
+        <p>
+          Still waiting for questions to come.
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>

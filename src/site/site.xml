@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <poweredBy>
+        <logo name="Maven" href="http://maven.apache.org/"
+              img="http://maven.apache.org/images/logos/maven-feather.png"/>
+    </poweredBy>
+    <body>
+        <menu name="Overview">
+            <item name="Introduction" href="index.html"/>
+            <item name="Goals" href="plugin-info.html"/>
+            <item name="Usage" href="usage.html"/>
+            <item name="FAQ" href="faq.html"/>
+        </menu>
+
+        <menu name="Examples">
+            <item name="Upload main jar artifact" href="examples/example-upload-jar.html"/>
+            <!--<item name="description2" href="examples/example-two.html"/>-->
+        </menu>
+        <menu ref="reports"/>
+
+    </body>
+</project>

@@ -1,0 +1,113 @@
+Usage
+
+* pom.xml
+
+  Assuming that your googlecode project id is equal to your project's artifactId and that you what to upload
+
+    * <<<target/${artifactId}-${version}.jar>>> and
+
+    * <<<target/${artifactId}-${version}-src.{tar.gz,zip} >>>
+
+---
+<plugin>
+    <groupId>org.riedelcastro</groupId>
+    <artifactId>gcupload-maven-plugin</artifactId>
+    <version>0.9</version>
+    <configuration>
+        <uploads>
+            <upload>
+                <extension>jar</extension>
+            </upload>
+            <upload>
+                <postfix>src</postfix>
+                <extensions>tar.gz,zip</extensions>
+                <labels>Type-Source,Featured</labels>
+            </upload>
+        </uploads>
+    </configuration>
+</plugin>
+---
+
+  Assuming that your googlecode project id differs from your artifactId, that you want to allow snapshots to be uploaded, and that you what to upload
+
+    * <<<target/${artifactId}-${version}.jar>>>
+
+---
+<plugin>
+    <groupId>org.riedelcastro</groupId>
+    <artifactId>gcupload-maven-plugin</artifactId>
+    <version>0.9</version>
+    <configuration>
+        <projectName>{your googlecode project id}</projectName>
+        <allowSnapshots>true</allowSnapshots>
+        <uploads>
+            <upload>
+                <extension>jar</extension>
+            </upload>
+        </uploads>
+    </configuration>
+</plugin>
+---
+
+* settings.xml
+
+  You will have to edit your settings file at <<<$USER_HOME/.m2/settings.xml>>> to specify google code username and password:
+
+---
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  ...
+  <server>
+    <id>googlecode</id>
+    <username>{your googlecode username}</username>
+    <password>{your gooclecode password}</password>
+  </server>
+  ...
+</settings>
+---
+
+* Installation
+
+** Manual
+
+  Download source package, extract and execute
+
+---
+$ mvn install
+---
+
+  in extracted top level directory.
+
+** Automatic
+
+  (At your own risk) you can simply include my repository to your pom.xml:
+
+---
+<repositories>
+    <repository>
+        <id>repository.riedelcastro.org</id>
+        <url>http://repository.riedelcastro.org</url>
+    </repository>
+</repositories>
+---
+
+* In combination with Maven Release Plugin
+
+  For example
+
+---
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-release-plugin</artifactId>
+    <version>2.0-beta-8</version>
+    <configuration>
+        <tagBase>https://gcupload-maven-plugin.googlecode.com/svn/tags</tagBase>
+        <releaseProfiles>release</releaseProfiles>
+        <goals>deploy assembly:assembly gcupload:gcupload</goals>
+    </configuration>
+</plugin>
+---
+
+

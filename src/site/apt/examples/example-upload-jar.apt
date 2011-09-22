@@ -1,0 +1,28 @@
+Upload main jar file
+
+---
+<plugin>
+    <groupId>org.riedelcastro</groupId>
+    <artifactId>maven-gcupload-plugin</artifactId>
+    <version>1.0</version>
+</plugin>
+---
+
+  or
+
+---
+<plugin>
+    <groupId>org.riedelcastro</groupId>
+    <artifactId>maven-gcupload-plugin</artifactId>
+    <version>1.0</version>
+    <configuration>
+        <uploads>
+            <upload>
+                <extensions>jar</extensions>
+                <labels>Type-Library,Featured</labels>
+                <summary>My Library</summary>
+            </upload>
+        </uploads>
+    </configuration>
+</plugin>
+---
