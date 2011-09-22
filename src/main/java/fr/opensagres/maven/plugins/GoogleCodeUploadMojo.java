@@ -1,4 +1,4 @@
-package org.riedelcastro;
+package fr.opensagres.maven.plugins;
 
 /*
  * Copyright 2001-2005 The Apache Software Foundation.
@@ -20,7 +20,6 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Settings;
-import org.apache.tools.ant.util.Base64Converter;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -58,7 +57,7 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
      * @parameter expression="${settings}"
      * @readonly
      */
-    private Settings settings;
+    protected Settings settings;
 
     /**
      * The server id (corresponding to a server's id in settings.xml).
@@ -95,11 +94,8 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
 
     /**
      * Upload descriptors. Each upload descriptor element may have the following subelements: <ul>
-     * <li>extensions: comma
-     * or whitespace separated list of the filename extensions of the files to upload (by default "jar")
-     * <li>postfix:
-     * the postfix to be appended after artifactId-Version (by default "")
-     * <li>prefix: the prefix of the files to upload (by default "artifactId-version")
+     * <li>classifier:
+     * a classifier of the maven artifact (by default "")
      * <li>summary: the summary of the files to upload (by default "artifactName postfix")
      * <li>labels: the labels of the files to upload (by default based on the postfix and packaging)
      *
@@ -114,7 +110,7 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
      *
      * @parameter expression="false"
      */
-    private boolean dryRun;
+    protected boolean dryRun;
 
     /**
      * Should it be possible to upload SNAPSHOT version files. By default this is set to false. This is in accordance
@@ -133,13 +129,14 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
      *                                state of the project (for example because a file to upload is missing).
      */
     private void validate(UploadDescriptor descriptor) throws MojoExecutionException {
-        for (File file : descriptor.getFilesToUpload()) {
+    	
+        File file = descriptor.getFilesToUpload();
             if (!file.exists()) {
                 getLog().error("File " + file + " requested by upload descriptor " + descriptor.getId()
                     + " does not exist. Make sure you execute the goals required to produce the file before.");
                 throw new MojoExecutionException("Upload file " + file + " + does not exist!");
             }
-        }
+        
     }
 
     /**
@@ -163,16 +160,16 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
         for (UploadDescriptor descriptor : uploadDescriptors) {
             getLog().info("Uploading " + descriptor.getId());
             if (!dryRun) {
-                File[] files = descriptor.getFilesToUpload();
-                String[] targetFileNames = descriptor.getTargetFileNames();
-                for (int fileIndex = 0; fileIndex < files.length; ++fileIndex) {
+                File files = descriptor.getFilesToUpload();
+                //String[] targetFileNames = descriptor.getTargetFileNames();
+                //for (int fileIndex = 0; fileIndex < files.length; ++fileIndex) {
                     try {
-                        upload(files[fileIndex], targetFileNames[fileIndex], descriptor.getSummary(),
+                        upload(files,  descriptor.getSummary(),
                             descriptor.getLabels());
                     } catch (IOException e) {
                         getLog().error("Problem when processing upload " + descriptor.getId(), e);
                     }
-                }
+                //}
             }
         }
 
@@ -218,7 +215,7 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
      * @param labelArray     the labels to attach to the file
      * @throws IOException if IO goes wrong.
      */
-    private void upload(File file, String targetFileName,
+    private void upload(File file, 
                         String summary, String[] labelArray) throws IOException {
         System.clearProperty("javax.net.ssl.trustStoreProvider"); // fixes open-jdk-issue
         System.clearProperty("javax.net.ssl.trustStoreType");
@@ -260,9 +257,9 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
             }
         }
 
-        getLog().info("Sending file... " + targetFileName);
+        getLog().info("Sending file... " + file.getName());
         sendLine(out, "--" + BOUNDARY);
-        sendLine(out, "content-disposition: form-data; name=\"filename\"; filename=\"" + targetFileName + "\"");
+        sendLine(out, "content-disposition: form-data; name=\"filename\"; filename=\"" + file.getName() + "\"");
         sendLine(out, "Content-Type: application/octet-stream");
         sendLine(out, "");
         int count;

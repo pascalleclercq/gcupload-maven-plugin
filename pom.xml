@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.riedelcastro</groupId>
+    <groupId>fr.opensagres.maven.plugins</groupId>
     <artifactId>gcupload-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
     <version>0.9.1-SNAPSHOT</version>
@@ -8,13 +8,17 @@
     <url>http://maven.apache.org</url>
     <issueManagement>
         <system>Google Code</system>
-        <url>http://code.google.com/p/gcupload-maven-plugin/issues/list</url>
+        <url>https://github.com/pascalleclercq/google-code-upload/issues</url>
     </issueManagement>
     <scm>
-        <connection>scm:svn:https://gcupload-maven-plugin.googlecode.com/svn/trunk</connection>
-        <developerConnection>scm:svn:https://gcupload-maven-plugin.googlecode.com/svn/trunk</developerConnection>
-        <url>http://code.google.com/p/gcupload-maven-plugin/issues/list</url>
+        <connection>scm:svn:git@github.com:pascalleclercq/google-code-upload.git</connection>
+        <developerConnection>scm:svn:git@github.com:pascalleclercq/google-code-upload.git</developerConnection>
+        <url>https://github.com/pascalleclercq/google-code-upload</url>
     </scm>
+    <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<mavenVersion>2.0.9</mavenVersion>
+	</properties>    
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -23,13 +27,19 @@
         </license>
     </licenses>
     <developers>
+    	<developer>
+    	<id>pascalleclercq</id>
+    	<name>Pascal Leclercq</name>
+    	<email>pascal.leclercq@gmail.com</email>
+    	</developer>
+    	<!--  initial contribution from -->
         <developer>
             <id>seb</id>
             <name>Sebastian Riedel</name>
             <url>http://sebrie.freehostia.com/cms</url>
         </developer>
     </developers>
-    <profiles>
+   <!--  <profiles>
         <profile>
             <id>upload</id>
             <build>
@@ -84,35 +94,56 @@
 
 
         </profile>
-    </profiles>
+    </profiles> -->
     <dependencies>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-plugin-api</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-project</artifactId>
-            <version>2.0.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-settings</artifactId>
-            <version>2.0.8</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.ant</groupId>
-            <artifactId>ant</artifactId>
-            <version>1.7.1</version>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.shared</groupId>
+			<artifactId>maven-plugin-testing-harness</artifactId>
+			<version>1.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-model</artifactId>
+			<version>${mavenVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-core</artifactId>
+			<version>${mavenVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-project</artifactId>
+			<version>${mavenVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-settings</artifactId>
+			<version>${mavenVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>jmock</groupId>
+			<artifactId>jmock</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1</version>
+		</dependency>
+	</dependencies>
     <build>
         <plugins>
             <plugin>
@@ -135,16 +166,16 @@
             </plugin>
 
         </plugins>
-        <extensions>
+        <!-- <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ftp</artifactId>
                 <version>1.0-beta-4</version>
             </extension>
-        </extensions>
+        </extensions> -->
 
     </build>
-    <distributionManagement>
+    <!-- <distributionManagement>
         <repository>
             <uniqueVersion>false</uniqueVersion>
             <id>freehostia</id>
@@ -159,7 +190,7 @@
             <id>freehostia</id>
             <url>ftp://sebrie.freehostia.com/riedelcastro.org/maven/site/gcupload-maven-plugin</url>
         </site>
-    </distributionManagement>
+    </distributionManagement> -->
 
     <reporting>
         <plugins>
