@@ -16,11 +16,6 @@ package fr.opensagres.maven.plugins;
  * limitations under the License.
  */
 
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.project.MavenProject;
-import org.apache.maven.settings.Settings;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,6 +28,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.project.MavenProject;
+import org.apache.maven.settings.Settings;
 
 /**
  * Uploads files in the target directory to google code. This code is based on Jonathan Fuerth's ant-googlecode-task.
