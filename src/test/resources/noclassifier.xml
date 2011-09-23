@@ -17,10 +17,25 @@
 			<plugin>
 				<artifactId>gcupload-maven-plugin</artifactId>
 				<configuration>
-					<settings implementation="org.apache.maven.settings.Settings" />
-					<project implementation="org.apache.maven.plugin.testing.stubs.MavenProjectStub" >
-					<version>1.0.0</version>
-					<artifact implementation="org.apache.maven.plugin.testing.stubs.ArtifactStub"/>
+					<dryRun>true</dryRun>
+					<settings implementation="org.apache.maven.settings.Settings">
+						<servers>
+							<server>
+								<id>code.google.com</id>
+								<username>my_login</username>
+								<password>my_password</password>
+							</server>
+						</servers>
+					</settings>
+					<project implementation="org.apache.maven.plugin.testing.stubs.MavenProjectStub">
+						<version>1.0.0</version>
+						<artifact implementation="org.apache.maven.plugin.testing.stubs.ArtifactStub" >
+							<file>src/test/resources/temp.txt</file>
+						</artifact>		
+						<artifact implementation="org.apache.maven.plugin.testing.stubs.ArtifactStub" >
+							<file>src/test/resources/temp-src.txt</file>
+							<classifier>src</classifier>
+						</artifact>			
 					</project>
 					<serverId>code.google.com</serverId>
 					<uploads>

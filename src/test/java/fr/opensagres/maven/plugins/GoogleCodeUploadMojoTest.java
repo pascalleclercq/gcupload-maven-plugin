@@ -21,12 +21,7 @@ package fr.opensagres.maven.plugins;
 
 import java.io.File;
 
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
-import org.apache.maven.settings.Server;
-
-import fr.opensagres.maven.plugins.GoogleCodeUploadMojo;
 
 /**
  * Test google-code:upload.
@@ -34,39 +29,21 @@ import fr.opensagres.maven.plugins.GoogleCodeUploadMojo;
  * @author <a href="mailto:pascal.leclercq@gmail.com">Pascal Leclercq</a>
  */
 public class GoogleCodeUploadMojoTest extends AbstractMojoTestCase {
-	protected GoogleCodeUploadMojo mojo;
 
-	protected void setUp() throws Exception {
-		super.setUp();
 
-		File testFile = getTestFile("target/test-classes/gcupload.xml");
-		System.out.println(testFile);
-		System.out.println(lookupMojo("gcupload", testFile));
-		mojo = (GoogleCodeUploadMojo) lookupMojo("gcupload", testFile);
+	public void testUploadNoClassifier() throws Exception {
+		File testFile = getTestFile("target/test-classes/noclassifier.xml");
+		GoogleCodeUploadMojo mojo = (GoogleCodeUploadMojo) lookupMojo("gcupload", testFile);
 
+		assertNotNull(mojo);
+		mojo.execute();
 	}
 
-	public void testUpload() throws MojoFailureException,
-			MojoExecutionException {
-		Server server = new Server();
-		server.setId("code.google.com");
-		server.setUsername(System.getenv("username"));
-		server.setPassword(System.getenv("password"));
+	public void testUploadWithClassifier() throws Exception {
+		File testFile = getTestFile("target/test-classes/withclassifier.xml");
+		GoogleCodeUploadMojo mojo = (GoogleCodeUploadMojo) lookupMojo("gcupload", testFile);
 
-		mojo.settings.addServer(server);
 		assertNotNull(mojo);
-
-		try {
-			mojo.dryRun=true;
-			assertNotNull(mojo.project);
-			assertNotNull(mojo.project.getArtifact());
-			mojo.project.getArtifact().setFile(File.createTempFile("temp", "jar"));
-			mojo.execute();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// assertTrue( true );
+		mojo.execute();
 	}
 }

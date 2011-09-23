@@ -49,7 +49,7 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
      * @required
      * @readonly
      */
-    protected MavenProject project;
+	private MavenProject project;
 
     /**
      * Access to settings.
@@ -57,12 +57,12 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
      * @parameter expression="${settings}"
      * @readonly
      */
-    protected Settings settings;
+    private Settings settings;
 
     /**
      * The server id (corresponding to a server's id in settings.xml).
      *
-     * @parameter expression="googlecode"
+     * @parameter default-value="code.google.com"
      */
     private String serverId;
 
@@ -96,8 +96,8 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
      * Upload descriptors. Each upload descriptor element may have the following subelements: <ul>
      * <li>classifier:
      * a classifier of the maven artifact (by default "")
-     * <li>summary: the summary of the files to upload (by default "artifactName postfix")
-     * <li>labels: the labels of the files to upload (by default based on the postfix and packaging)
+     * <li>summary: the summary of the files to upload (by default "artifactName classifier")
+     * <li>labels: the labels of the files to upload (by default based on the classifier and packaging)
      *
      * </ul>
      *
@@ -110,7 +110,7 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
      *
      * @parameter expression="false"
      */
-    protected boolean dryRun;
+    private boolean dryRun;
 
     /**
      * Should it be possible to upload SNAPSHOT version files. By default this is set to false. This is in accordance
@@ -130,7 +130,7 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
      */
     private void validate(UploadDescriptor descriptor) throws MojoExecutionException {
     	
-        File file = descriptor.getFilesToUpload();
+        File file = descriptor.getFile();
             if (!file.exists()) {
                 getLog().error("File " + file + " requested by upload descriptor " + descriptor.getId()
                     + " does not exist. Make sure you execute the goals required to produce the file before.");
@@ -160,16 +160,15 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
         for (UploadDescriptor descriptor : uploadDescriptors) {
             getLog().info("Uploading " + descriptor.getId());
             if (!dryRun) {
-                File files = descriptor.getFilesToUpload();
-                //String[] targetFileNames = descriptor.getTargetFileNames();
-                //for (int fileIndex = 0; fileIndex < files.length; ++fileIndex) {
+                File file = descriptor.getFile();
+                if(file==null)
+                	throw new MojoExecutionException("artifact does not exists "+project +" and classifier="+descriptor.getClassifier()  );
                     try {
-                        upload(files,  descriptor.getSummary(),
+                        upload(file,  descriptor.getSummary(),
                             descriptor.getLabels());
                     } catch (IOException e) {
                         getLog().error("Problem when processing upload " + descriptor.getId(), e);
                     }
-                //}
             }
         }
 

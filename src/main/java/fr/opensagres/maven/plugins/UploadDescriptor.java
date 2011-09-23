@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,19 +17,20 @@ import org.apache.maven.project.MavenProject;
  * deducing default values for properties based on the project properties.
  * 
  * @author Sebastian Riedel
+ * @author Pascal Leclercq
  */
 public class UploadDescriptor {
-	// private String[] extensions,
+
 	private String[] labels;
 	private String classifier = "", summary;
-	// private String prefix;
+
 	private MavenProject project;
 
 	private Artifact artifact;
 
 	private static final String LABELS = "labels";
 	private static final String SUMMARY = "summary";
-	private static final String CLASSIFIER = "classifer";
+	private static final String CLASSIFIER = "classifier";
 	private static final Set<String> allowedProperties = new HashSet<String>(
 			Arrays.asList(CLASSIFIER, LABELS, SUMMARY));
 
@@ -66,7 +68,7 @@ public class UploadDescriptor {
 
 		if (properties.containsKey(CLASSIFIER)) {
 			setClassifier((String) properties.get(CLASSIFIER));
-			Set<Artifact> artifacts = project.getArtifacts();
+			List<Artifact> artifacts = project.getAttachedArtifacts();
 			for (Artifact artifact : artifacts) {
 				if (artifact.getClassifier().equals(getClassifier())) {
 					this.artifact = artifact;
@@ -90,7 +92,7 @@ public class UploadDescriptor {
 	/**
 	 * Returns the id of this upload to be used in info messages.
 	 * 
-	 * @return id of this upload (constructed of filename + extensions.
+	 * @return id of this upload (classifier or blank).
 	 */
 	public String getId() {
 		return classifier;
@@ -101,29 +103,13 @@ public class UploadDescriptor {
 	 * 
 	 * @return files to upload.
 	 */
-	public File getFilesToUpload() {
-		return artifact.getFile();
-		/*
-		 * String[] fileNames = getTargetFileNames(); File[] result = new
-		 * File[fileNames.length]; for (int i = 0; i < result.length; ++i) {
-		 * result[i] = new File(project.getBasedir() + "/target/" +
-		 * fileNames[i]); } return result;
-		 */}
+	public File getFile() {
+		if (artifact != null)
+			return artifact.getFile();
 
-	/* *//**
-	 * Returns the list of filename extensions. This is either a
-	 * user-specified list (through configuration) or a single default extension
-	 * based on the project packaging property.
-	 * 
-	 * @return array of file name extensions.
-	 */
-	/*
-	 * public String[] getExtensions() { if (extensions != null) return
-	 * extensions; if (project.getPackaging().equals("maven-plugin") ||
-	 * project.getPackaging().equals("jar")) return new String[]{"jar"}; if
-	 * (project.getPackaging().equals("war")) return new String[]{"war"}; return
-	 * new String[]{"jar"}; }
-	 */
+		// else
+		return null;
+	}
 
 	/**
 	 * Returns the classifier that the target files have appended to their
@@ -138,21 +124,7 @@ public class UploadDescriptor {
 		return classifier == null ? "" : classifier;
 	}
 
-	/* *//**
-	 * Return the array of target filenames as defined by the prefix,
-	 * classifier and extensions.
-	 * 
-	 * @return the array of target filenames
-	 */
-	/*
-	 * public String[] getTargetFileNames() { String[] extensions =
-	 * getExtensions(); String[] result = new String[extensions.length]; String
-	 * classifier = getClassifier();
-	 * 
-	 * for (int i = 0; i < extensions.length; ++i) { result[i] =
-	 * createFileNameNoExtension(prefix, classifier) + "." + extensions[i]; }
-	 * return result; }
-	 */
+
 
 	/**
 	 * creates a filename without extension based on prefix and classifier.
@@ -171,14 +143,13 @@ public class UploadDescriptor {
 
 	/**
 	 * Returns the summary of this upload to be added to the file in google
-	 * code. If no summary has been specified this is deduced from project name,
-	 * version and classifier.
+	 * code. If no summary has been specified this is deduced "description"
+	 *  tag of the project.
 	 * 
 	 * @return the summary of the upload.
 	 */
 	public String getSummary() {
-		return summary == null ? project.getName() + " " + project.getVersion()
-				+ " " + getClassifier() : summary;
+		return summary == null ? project.getDescription() : summary;
 	}
 
 	/**
@@ -201,6 +172,7 @@ public class UploadDescriptor {
 				|| getClassifier().contains("sources")) {
 			result.add("Type-Source");
 		}
+		
 		return result.toArray(new String[result.size()]);
 	}
 
@@ -242,11 +214,9 @@ public class UploadDescriptor {
 	public String toString() {
 		return "UploadDescriptor{"
 				+
-				// "extensions=" + Arrays.asList(getExtensions()) +
-				", files=" + Arrays.asList(getFilesToUpload()) + ", labels="
+				", files=" + getFile() + ", labels="
 				+ Arrays.asList(getLabels()) + ", classifier='"
-				+ getClassifier() + '\'' + ", summary='" + getSummary() + '\'' +
-				// ", prefix='" + getPrefix() +
+				+ getClassifier() + '\'' + ", summary='" + getSummary() +
 				'}';
 	}
 }

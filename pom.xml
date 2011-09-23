@@ -6,6 +6,7 @@
     <version>0.9.1-SNAPSHOT</version>
     <name>Google Code Upload Maven Plugin</name>
     <url>http://maven.apache.org</url>
+    
     <issueManagement>
         <system>Google Code</system>
         <url>https://github.com/pascalleclercq/google-code-upload/issues</url>
