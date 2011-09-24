@@ -38,7 +38,7 @@ import org.apache.maven.settings.Settings;
  * Uploads files in the target directory to google code. This code is based on Jonathan Fuerth's ant-googlecode-task.
  *
  * @goal gcupload
- * @execute phase="package"
+ * @execute phase="deploy"
  */
 public class GoogleCodeUploadMojo extends AbstractMojo {
 
