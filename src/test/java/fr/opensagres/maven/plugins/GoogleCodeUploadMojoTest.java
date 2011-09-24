@@ -46,4 +46,13 @@ public class GoogleCodeUploadMojoTest extends AbstractMojoTestCase {
 		assertNotNull(mojo);
 		mojo.execute();
 	}
+	
+	public void testUploadMultiple() throws Exception {
+		File testFile = getTestFile("target/test-classes/multiple.xml");
+		GoogleCodeUploadMojo mojo = (GoogleCodeUploadMojo) lookupMojo("gcupload", testFile);
+
+		assertNotNull(mojo);
+		mojo.execute();
+		
+	}
 }
