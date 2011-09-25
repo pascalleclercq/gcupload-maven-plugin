@@ -149,7 +149,19 @@ public class UploadDescriptor {
 	 * @return the summary of the upload.
 	 */
 	public String getSummary() {
-		return summary == null ? project.getDescription() : summary;
+		
+		
+		if( summary == null ){
+			if(project.getDescription()!=null){
+				return project.getDescription();
+				
+			}
+		} else {
+			return summary;
+		}
+		
+		//else
+		return "";
 	}
 
 	/**

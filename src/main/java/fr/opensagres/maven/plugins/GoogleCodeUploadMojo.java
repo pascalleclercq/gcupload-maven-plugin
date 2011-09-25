@@ -29,6 +29,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
+
+import org.apache.maven.model.DistributionManagement;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
@@ -87,7 +92,7 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
     /**
      * Google Code project name to upload to.
      *
-     * @parameter expression="${project.artifactId}"
+     * @parameter default-value="${project.artifactId}"
      */
     private String projectName;
 
@@ -146,7 +151,7 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
      */
     public void execute() throws MojoExecutionException {
 
-        if (!allowSnapshots && project.getVersion().endsWith("SNAPSHOT")) {
+        if (!allowSnapshots && isSnapshot()) {
             throw new MojoExecutionException("Cannot upload SNAPSHOT versions. If really necessary, set " +
                 "allowSnapshots property to true.");
         }
@@ -161,19 +166,24 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
             getLog().info("Uploading " + descriptor.getId());
             if (!dryRun) {
                 File file = descriptor.getFile();
-                if(file==null)
+                if(file==null || !file.exists())
                 	throw new MojoExecutionException("artifact does not exists "+project +" and classifier="+descriptor.getClassifier()  );
                     try {
                         upload(file,  descriptor.getSummary(),
                             descriptor.getLabels());
                     } catch (IOException e) {
-                        getLog().error("Problem when processing upload " + descriptor.getId(), e);
+                    	
+                        getLog().info("Problem when processing upload " + descriptor.getId(), e);
                     }
             }
         }
 
 
     }
+
+	private boolean isSnapshot() {
+		return project.getVersion().endsWith("SNAPSHOT");
+	}
 
     /**
      * Extract the list of upload descriptors from the configuration of the plugin.
@@ -185,7 +195,10 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
     private List<UploadDescriptor> generateUploadDescriptors() throws MojoExecutionException {
         List<UploadDescriptor> uploadDescriptors = new ArrayList<UploadDescriptor>();
 
-        if (uploads.length == 0) {
+        if(uploads!=null){
+        	
+        
+          if (uploads.length == 0) {
             UploadDescriptor descriptor = new UploadDescriptor(project);
             getLog().info("Loading descriptor " + descriptor.getId());
             validate(descriptor);
@@ -200,6 +213,7 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
                 uploadDescriptors.add(descriptor);
                 getLog().debug(" Descriptor " + descriptor.getId() + " = " + descriptor);
             }
+        }
         }
         return uploadDescriptors;
     }
@@ -225,13 +239,17 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
         getLog().info("The upload URL is " + url);
 
         InputStream in = new BufferedInputStream(new FileInputStream(file));
-
+        if(in.available()>0){
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+       
+    
+        conn.addRequestProperty("User-Agent", "Mozilla/4.76");
+        conn.setRequestProperty("Cookie", "foo=bar"); 
         conn.setDoOutput(true);
         conn.setRequestProperty("Authorization", "Basic " + createAuthToken(userName, password));
         conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
         conn.setRequestProperty("User-Agent", "Google Code Upload Maven Plugin 1.0");
-
+        
         getLog().info("Attempting to connect (username is " + userName + ")...");
         conn.connect();
 
@@ -288,6 +306,7 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
         in.close();
 
         conn.disconnect();
+        }
     }
 
     /**
@@ -323,13 +342,20 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
      * @throws java.net.MalformedURLException if URL is malformed.
      */
     private URL createUploadURL() throws MalformedURLException {
-        if (uploadUrl != null) {
+    	
+   DistributionManagement distributionManagement= 		   project.getDistributionManagement();
+   if(isSnapshot()){
+
+	   getLog().error(project.toString());
+	   getLog().error(distributionManagement.toString());
+	   uploadUrl=distributionManagement.getSnapshotRepository().getUrl();
+   } else {
+	   uploadUrl=distributionManagement.getRepository().getUrl();
+   }
+   
+        
+getLog().error("No uploadUrl please configure distributionManagement");
             return new URL(uploadUrl);
-        } else {
-            if (projectName == null) {
-                throw new NullPointerException("projectName must be set");
-            }
-            return new URL("https", projectName + ".googlecode.com", "/files");
-        }
+ 
     }
 }
