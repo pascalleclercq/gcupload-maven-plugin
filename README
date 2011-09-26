@@ -1,0 +1,42 @@
+This project is a fork from http://code.google.com/p/gcupload-maven-plugin/.
+
+I made some slight changes to be more conform to maven conventions.
+
+HOW-TO
+======
+
+just configure this in your pom.xml:
+
+		<plugin>
+			<groupId>fr.opensagres.maven.plugins</groupId>
+			<artifactId>gcupload-maven-plugin</artifactId>
+			<inherited>true</inherited>
+			<executions>
+				<execution>
+					<id>gcupload</id>
+					<phase>deploy</phase>
+					<goals>
+						<goal>gcupload</goal>
+					</goals>
+				</execution>
+			</executions> 
+			<configuration>
+				<!-- "false" by default -->
+				<allowSnapshots>true</allowSnapshots>
+				<uploads>
+					<upload>
+						<!--makes sense only after a assembly:single and with corresponding descriptor -->
+						<classifier>src</classifier>
+						<labels>OpSys-All,Type-Source,Featured</labels>
+					</upload>
+				</uploads>
+			</configuration>
+		</plugin>
+
+and configure your settings.xml like this:
+
+     <server>
+     	<id>code.google.com</id>
+      	<username>youraccount@gmail.com</username>
+	    <password>your google code password</password>
+     </server> 
