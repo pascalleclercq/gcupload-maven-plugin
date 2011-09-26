@@ -7,36 +7,39 @@ HOW-TO
 
 just configure this in your pom.xml:
 
-		<plugin>
-			<groupId>fr.opensagres.maven.plugins</groupId>
-			<artifactId>gcupload-maven-plugin</artifactId>
-			<inherited>true</inherited>
-			<executions>
-				<execution>
-					<id>gcupload</id>
-					<phase>deploy</phase>
-					<goals>
-						<goal>gcupload</goal>
-					</goals>
-				</execution>
-			</executions> 
-			<configuration>
-				<!-- "false" by default -->
-				<allowSnapshots>true</allowSnapshots>
-				<uploads>
-					<upload>
-						<!--makes sense only after a assembly:single and with corresponding descriptor -->
-						<classifier>src</classifier>
-						<labels>OpSys-All,Type-Source,Featured</labels>
-					</upload>
-				</uploads>
-			</configuration>
-		</plugin>
+By default, pom.xml description is used to configure the "summary".
+
+	<plugin>
+		<groupId>fr.opensagres.maven.plugins</groupId>
+		<artifactId>gcupload-maven-plugin</artifactId>
+		<inherited>true</inherited>
+		<executions>
+			<execution>
+				<id>gcupload</id>
+				<phase>deploy</phase>
+				<goals>
+					<goal>gcupload</goal>
+				</goals>
+			</execution>
+		</executions> 
+		<configuration>
+			<!-- "false" by default -->
+			<allowSnapshots>true</allowSnapshots>
+			<uploads>
+				<upload>
+				    <!-- optional -->
+					<!--makes sense only after a assembly:single and with corresponding descriptor -->
+					<classifier>src</classifier>
+					<labels>OpSys-All,Type-Source,Featured</labels>
+				</upload>
+			</uploads>
+		</configuration>
+	</plugin>
 
 and configure your settings.xml like this:
 
-     <server>
-     	<id>code.google.com</id>
-      	<username>youraccount@gmail.com</username>
-	    <password>your google code password</password>
-     </server> 
+ <server>
+ 	<id>code.google.com</id>
+   	<username>youraccount@gmail.com</username>
+    <password>your google code password</password>
+  </server> 
