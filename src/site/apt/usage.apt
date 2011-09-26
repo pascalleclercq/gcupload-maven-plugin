@@ -10,17 +10,16 @@ Usage
 
 ---
 <plugin>
-    <groupId>org.riedelcastro</groupId>
-    <artifactId>gcupload-maven-plugin</artifactId>
-    <version>0.9</version>
+   <groupId>fr.opensagres.maven.plugins</groupId>
+	<artifactId>gcupload-maven-plugin</artifactId>
+	<version>1.0.0</version>
     <configuration>
         <uploads>
             <upload>
-                <extension>jar</extension>
+                <labels>Featured</labels>
             </upload>
             <upload>
-                <postfix>src</postfix>
-                <extensions>tar.gz,zip</extensions>
+                <classifier>sources</classifier>
                 <labels>Type-Source,Featured</labels>
             </upload>
         </uploads>
@@ -84,14 +83,6 @@ $ mvn install
 
   (At your own risk) you can simply include my repository to your pom.xml:
 
----
-<repositories>
-    <repository>
-        <id>repository.riedelcastro.org</id>
-        <url>http://repository.riedelcastro.org</url>
-    </repository>
-</repositories>
----
 
 * In combination with Maven Release Plugin
 
@@ -101,11 +92,10 @@ $ mvn install
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-release-plugin</artifactId>
-    <version>2.0-beta-8</version>
+    <version>2.1</version>
     <configuration>
-        <tagBase>https://gcupload-maven-plugin.googlecode.com/svn/tags</tagBase>
         <releaseProfiles>release</releaseProfiles>
-        <goals>deploy assembly:assembly gcupload:gcupload</goals>
+        <goals>deploy assembly:single gcupload:gcupload</goals>
     </configuration>
 </plugin>
 ---

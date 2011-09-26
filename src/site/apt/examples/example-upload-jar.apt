@@ -2,9 +2,9 @@ Upload main jar file
 
 ---
 <plugin>
-    <groupId>org.riedelcastro</groupId>
-    <artifactId>maven-gcupload-plugin</artifactId>
-    <version>1.0</version>
+    <groupId>fr.opensagres.maven.plugins</groupId>
+	<artifactId>gcupload-maven-plugin</artifactId>
+	<version>1.0.0</version>
 </plugin>
 ---
 
@@ -12,13 +12,13 @@ Upload main jar file
 
 ---
 <plugin>
-    <groupId>org.riedelcastro</groupId>
-    <artifactId>maven-gcupload-plugin</artifactId>
-    <version>1.0</version>
+    <groupId>fr.opensagres.maven.plugins</groupId>
+	<artifactId>gcupload-maven-plugin</artifactId>
+    <version>1.0.0</version>
     <configuration>
         <uploads>
             <upload>
-                <extensions>jar</extensions>
+                <classifier>jar</classifier>
                 <labels>Type-Library,Featured</labels>
                 <summary>My Library</summary>
             </upload>

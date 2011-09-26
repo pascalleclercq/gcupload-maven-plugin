@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.maven.model.DistributionManagement;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
@@ -78,17 +77,13 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
     private String password;
 
 
-    /**
-     * Overrides the default upload URL. This parameter is only useful for testing this Ant task without uploading to
-     * the live server.
-     */
-    private String uploadUrl;
+  
 
 
     /**
      * Google Code project name to upload to.
      *
-     * @parameter default-value="${project.artifactId}"
+     * @parameter 
      */
     private String projectName;
 
@@ -330,28 +325,22 @@ public class GoogleCodeUploadMojo extends AbstractMojo {
     }
 
     /**
-     * Creates the correct URL for uploading to the named google code project. If uploadUrl is not set (this is the
-     * standard case), the correct URL will be generated based on the {@link #projectName}.  Otherwise, if uploadUrl is
-     * set, it will be used and the project name setting will be ignored.
-     *
+     * Creates the correct URL for uploading to the named google code project.
+     * The correct URL will be generated based on the {@link #projectName}.  
+     * If projectName is not set, It will be guessed based on the last part of the groupId
      * @return the upload URL.
      * @throws java.net.MalformedURLException if URL is malformed.
      */
     private URL createUploadURL() throws MalformedURLException {
     	
-   DistributionManagement distributionManagement= 		   project.getDistributionManagement();
-   if(isSnapshot()){
-
-	   getLog().error(project.toString());
-	   getLog().error(distributionManagement.toString());
-	   uploadUrl=distributionManagement.getSnapshotRepository().getUrl();
-   } else {
-	   uploadUrl=distributionManagement.getRepository().getUrl();
-   }
-   
-        
-getLog().error("No uploadUrl please configure distributionManagement");
-            return new URL(uploadUrl);
+    	 if (projectName == null) {
+             //trying to guess based on the last part of the groupId
+    		 String groupId=project.getGroupId();
+    		 int pos=groupId.lastIndexOf(".");
+    		 projectName=groupId.substring(pos+1, groupId.length());
+    		 
+         }
+         return new URL("https", projectName + ".googlecode.com", "/files");
  
     }
 }
