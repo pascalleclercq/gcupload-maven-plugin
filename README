@@ -12,25 +12,18 @@ By default, pom.xml description is used to configure the "summary".
   <plugin>
    <groupId>fr.opensagres.maven.plugins</groupId>
    <artifactId>gcupload-maven-plugin</artifactId>
-   <inherited>true</inherited>
-   <executions>
-    <execution>
-     <id>gcupload</id>
-     <phase>deploy</phase>
-     <goals>
-      <goal>gcupload</goal>
-     </goals>
-    </execution>
-   </executions> 
    <configuration>
     <!-- "false" by default -->
     <allowSnapshots>true</allowSnapshots>
     <uploads>
      <upload>
-         <!-- optional -->
+      <!-- optional -->
       <!--makes sense only after a assembly:single and with corresponding descriptor -->
       <classifier>src</classifier>
+      <!-- google code labels -->
       <labels>OpSys-All,Type-Source,Featured</labels>
+      <!-- if not set, pom.xml description is used -->
+      <summary>amazing !</summary>
      </upload>
     </uploads>
    </configuration>
