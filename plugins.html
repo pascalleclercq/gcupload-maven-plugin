@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title></title>
+    <title>Project Build Plugins</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -44,8 +44,8 @@
                                 <h5>Overview</h5>
                   <ul>
                   <li class="none">
-            <strong>Introduction</strong>
-          </li>
+                          <a href="index.html" title="Introduction">Introduction</a>
+            </li>
                   <li class="none">
                           <a href="plugin-info.html" title="Goals">Goals</a>
             </li>
@@ -68,8 +68,8 @@
                           <a href="project-info.html" title="Project Information">Project Information</a>
                     <ul>
                       <li class="none">
-            <strong>About</strong>
-          </li>
+                          <a href="index.html" title="About">About</a>
+            </li>
                       <li class="none">
                           <a href="source-repository.html" title="Source Repository">Source Repository</a>
             </li>
@@ -83,8 +83,8 @@
                           <a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a>
             </li>
                       <li class="none">
-                          <a href="plugins.html" title="Project Plugins">Project Plugins</a>
-            </li>
+            <strong>Project Plugins</strong>
+          </li>
                       <li class="none">
                           <a href="project-summary.html" title="Project Summary">Project Summary</a>
             </li>
@@ -115,7 +115,7 @@
     </div>
     <div id="bodyColumn">
       <div id="contentBox">
-        <div class="section"><h2>Google Code Upload Maven Plugin<a name="Google_Code_Upload_Maven_Plugin"></a></h2><p>This plugin uploads files in the target directory to the google code download file list. It follows maven's &quot;convention over configuration&quot; paradigm in the sense that by default most upload properties, such as labels, summary and filenames are deduced from the project information provided in the pom.</p><div class="section"><h3>Goals Overview<a name="Goals_Overview"></a></h3><p>General information about the goals.</p><ul><li><a href="#gcupload-mojo.html">gcupload:gcupload</a> upload to Google Code.</li></ul></div><div class="section"><h3>Usage<a name="Usage"></a></h3><p>General instructions on how to use the Plugin Name can be found on the <a href="#usage.html">usage page</a>. Some more specific use cases are described in the examples given below. Last but not least, users occasionally contribute additional examples, tips or errata to the <a class="externalLink" href="http://docs.codehaus.org/display/MAVENUSER/Plugin+Name">plugin's wiki page</a>.</p><p>In case you still have questions regarding the plugin's usage, please have a look at the <a href="#faq.html">FAQ</a> and feel free to contact the <a href="#mail-lists.html">user mailing list</a>. The posts to the mailing list are archived and could already contain the answer to your question as part of an older thread. Hence, it is also worth browsing/searching the <a href="#mail-lists.html">mail archive</a>.</p><p>If you feel like the plugin is missing a feature or has a defect, you can fill a feature request or bug report in our <a href="#issue-tracking.html">issue tracker</a>. When creating a new issue, please provide a comprehensive description of your concern. Especially for fixing bugs it is crucial that the developers can reproduce your problem. For this reason, entire debug logs, POMs or most preferably little demo projects attached to the issue are very much appreciated. Of course, patches are welcome, too. Contributors can check out the project from our <a href="#source-repository.html">source repository</a> and will find supplementary information in the <a class="externalLink" href="http://maven.apache.org/guides/development/guide-helping.html">guide to helping with Maven</a>.</p></div><div class="section"><h3>Examples<a name="Examples"></a></h3><p>To provide you with better understanding of some usages of the Plugin Name, you can take a look into the following examples:</p><ul><li><a href="#examplesexample-upload-jar.html"> Upload jar to google</a></li></ul></div></div>
+        <div class="section"><h2>Project Build Plugins<a name="Project_Build_Plugins"></a></h2><a name="Project_Build_Plugins"></a><table border="0" class="bodyTable"><tr class="a"><th>GroupId</th><th>ArtifactId</th><th>Version</th></tr><tr class="b"><td>com.github.github</td><td><a class="externalLink" href="https://github.com/github/maven-plugins">site-maven-plugin</a></td><td>0.1</td></tr><tr class="a"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-clean-plugin/">maven-clean-plugin</a></td><td>2.4.1</td></tr><tr class="b"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-compiler-plugin/">maven-compiler-plugin</a></td><td>2.3.2</td></tr><tr class="a"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-deploy-plugin/">maven-deploy-plugin</a></td><td>2.5</td></tr><tr class="b"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-enforcer-plugin/">maven-enforcer-plugin</a></td><td>1.0</td></tr><tr class="a"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-install-plugin/">maven-install-plugin</a></td><td>2.3.1</td></tr><tr class="b"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-jar-plugin/">maven-jar-plugin</a></td><td>2.3.1</td></tr><tr class="a"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-plugin-plugin/">maven-plugin-plugin</a></td><td>2.7</td></tr><tr class="b"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-resources-plugin/">maven-resources-plugin</a></td><td>2.4.3</td></tr><tr class="a"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-site-plugin/">maven-site-plugin</a></td><td>3.0</td></tr><tr class="b"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/surefire/maven-surefire-plugin">maven-surefire-plugin</a></td><td>2.7.2</td></tr></table></div><div class="section"><h2>Project Report Plugins<a name="Project_Report_Plugins"></a></h2><a name="Project_Report_Plugins"></a><table border="0" class="bodyTable"><tr class="a"><th>GroupId</th><th>ArtifactId</th><th>Version</th></tr><tr class="b"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-javadoc-plugin/">maven-javadoc-plugin</a></td><td>2.4</td></tr><tr class="a"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/jxr/maven-jxr-plugin/">maven-jxr-plugin</a></td><td>2.1</td></tr><tr class="b"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-plugin-plugin/">maven-plugin-plugin</a></td><td>2.9</td></tr></table></div>
       </div>
     </div>
     <div class="clear">

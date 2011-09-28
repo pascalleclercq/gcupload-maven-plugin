@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title></title>
+    <title>Team list</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -44,8 +44,8 @@
                                 <h5>Overview</h5>
                   <ul>
                   <li class="none">
-            <strong>Introduction</strong>
-          </li>
+                          <a href="index.html" title="Introduction">Introduction</a>
+            </li>
                   <li class="none">
                           <a href="plugin-info.html" title="Goals">Goals</a>
             </li>
@@ -68,8 +68,8 @@
                           <a href="project-info.html" title="Project Information">Project Information</a>
                     <ul>
                       <li class="none">
-            <strong>About</strong>
-          </li>
+                          <a href="index.html" title="About">About</a>
+            </li>
                       <li class="none">
                           <a href="source-repository.html" title="Source Repository">Source Repository</a>
             </li>
@@ -95,8 +95,8 @@
                           <a href="license.html" title="Project License">Project License</a>
             </li>
                       <li class="none">
-                          <a href="team-list.html" title="Project Team">Project Team</a>
-            </li>
+            <strong>Project Team</strong>
+          </li>
                       <li class="none">
                           <a href="integration.html" title="Continuous Integration">Continuous Integration</a>
             </li>
@@ -115,7 +115,22 @@
     </div>
     <div id="bodyColumn">
       <div id="contentBox">
-        <div class="section"><h2>Google Code Upload Maven Plugin<a name="Google_Code_Upload_Maven_Plugin"></a></h2><p>This plugin uploads files in the target directory to the google code download file list. It follows maven's &quot;convention over configuration&quot; paradigm in the sense that by default most upload properties, such as labels, summary and filenames are deduced from the project information provided in the pom.</p><div class="section"><h3>Goals Overview<a name="Goals_Overview"></a></h3><p>General information about the goals.</p><ul><li><a href="#gcupload-mojo.html">gcupload:gcupload</a> upload to Google Code.</li></ul></div><div class="section"><h3>Usage<a name="Usage"></a></h3><p>General instructions on how to use the Plugin Name can be found on the <a href="#usage.html">usage page</a>. Some more specific use cases are described in the examples given below. Last but not least, users occasionally contribute additional examples, tips or errata to the <a class="externalLink" href="http://docs.codehaus.org/display/MAVENUSER/Plugin+Name">plugin's wiki page</a>.</p><p>In case you still have questions regarding the plugin's usage, please have a look at the <a href="#faq.html">FAQ</a> and feel free to contact the <a href="#mail-lists.html">user mailing list</a>. The posts to the mailing list are archived and could already contain the answer to your question as part of an older thread. Hence, it is also worth browsing/searching the <a href="#mail-lists.html">mail archive</a>.</p><p>If you feel like the plugin is missing a feature or has a defect, you can fill a feature request or bug report in our <a href="#issue-tracking.html">issue tracker</a>. When creating a new issue, please provide a comprehensive description of your concern. Especially for fixing bugs it is crucial that the developers can reproduce your problem. For this reason, entire debug logs, POMs or most preferably little demo projects attached to the issue are very much appreciated. Of course, patches are welcome, too. Contributors can check out the project from our <a href="#source-repository.html">source repository</a> and will find supplementary information in the <a class="externalLink" href="http://maven.apache.org/guides/development/guide-helping.html">guide to helping with Maven</a>.</p></div><div class="section"><h3>Examples<a name="Examples"></a></h3><p>To provide you with better understanding of some usages of the Plugin Name, you can take a look into the following examples:</p><ul><li><a href="#examplesexample-upload-jar.html"> Upload jar to google</a></li></ul></div></div>
+        <div class="section"><h2>The Team<a name="The_Team"></a></h2><a name="The_Team"></a><p>A successful project requires many people to play many roles. Some members write code or documentation, while others are valuable as testers, submitting patches and suggestions.</p><p>The team is comprised of Members and Contributors. Members have direct access to the source of a project and actively evolve the code-base. Contributors improve the project through submission of patches and suggestions to the Members. The number of Contributors to the project is unbounded. Get involved today. All contributions to the project are greatly appreciated.</p><div class="section"><h3>Members<a name="Members"></a></h3><a name="Members"></a><p>The following is a list of developers with commit privileges that have directly contributed to the project in one way or another.</p><table border="0" class="bodyTable"><tr class="a"><th>Id</th><th>Name</th><th>Email</th><th>URL</th></tr><tr class="b"><td><a name="pascalleclercq"></a>pascalleclercq</td><td>Pascal Leclercq</td><td><a class="externalLink" href="mailto:pascal.leclercq@gmail.com">pascal.leclercq@gmail.com</a></td><td>-</td></tr><tr class="a"><td><a name="seb"></a>seb</td><td>Sebastian Riedel</td><td>-</td><td><a class="externalLink" href="http://sebrie.freehostia.com/cms">http://sebrie.freehostia.com/cms</a></td></tr></table></div><div class="section"><h3>Contributors<a name="Contributors"></a></h3><a name="Contributors"></a><p>There are no contributors listed for this project. Please check back again later.</p><script type="text/javascript">
+function offsetDate(id, offset) {
+    var now = new Date();
+    var nowTime = now.getTime();
+    var localOffset = now.getTimezoneOffset();
+    var developerTime = nowTime + ( offset * 60 * 60 * 1000 )+ ( localOffset * 60 * 1000 );
+    var developerDate = new Date(developerTime);
+
+    document.getElementById(id).innerHTML = developerDate;
+}
+
+function init(){
+}
+
+window.onLoad = init();
+</script></div></div>
       </div>
     </div>
     <div class="clear">

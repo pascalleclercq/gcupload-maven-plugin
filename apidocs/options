@@ -1,0 +1,22 @@
+-classpath
+'/Users/pascalleclercq/git/gcupload-maven-plugin/target/classes:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-core/2.0.9/maven-core-2.0.9.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-profile/2.0.9/maven-profile-2.0.9.jar:/Users/pascalleclercq/.m2/repository/commons-cli/commons-cli/1.0/commons-cli-1.0.jar:/Users/pascalleclercq/.m2/repository/org/codehaus/plexus/plexus-container-default/1.0-alpha-9-stable-1/plexus-container-default-1.0-alpha-9-stable-1.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-plugin-descriptor/2.0.9/maven-plugin-descriptor-2.0.9.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-repository-metadata/2.0.9/maven-repository-metadata-2.0.9.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-artifact-manager/2.0.9/maven-artifact-manager-2.0.9.jar:/Users/pascalleclercq/.m2/repository/jmock/jmock/1.0.1/jmock-1.0.1.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-plugin-registry/2.0.9/maven-plugin-registry-2.0.9.jar:/Users/pascalleclercq/.m2/repository/org/codehaus/plexus/plexus-interactivity-api/1.0-alpha-4/plexus-interactivity-api-1.0-alpha-4.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-error-diagnostics/2.0.9/maven-error-diagnostics-2.0.9.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.9/maven-reporting-api-2.0.9.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-project/2.0.9/maven-project-2.0.9.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-settings/2.0.9/maven-settings-2.0.9.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-plugin-api/2.0/maven-plugin-api-2.0.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-artifact/2.0.9/maven-artifact-2.0.9.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/wagon/wagon-provider-api/1.0-beta-2/wagon-provider-api-1.0-beta-2.jar:/Users/pascalleclercq/.m2/repository/classworlds/classworlds/1.1/classworlds-1.1.jar:/Users/pascalleclercq/.m2/repository/org/codehaus/plexus/plexus-utils/1.4.2/plexus-utils-1.4.2.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-10/doxia-sink-api-1.0-alpha-10.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-model/2.0.9/maven-model-2.0.9.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-monitor/2.0.9/maven-monitor-2.0.9.jar:/Users/pascalleclercq/.m2/repository/org/jdom/jdom/1.1/jdom-1.1.jar:/Users/pascalleclercq/.m2/repository/org/apache/maven/maven-plugin-parameter-documenter/2.0.9/maven-plugin-parameter-documenter-2.0.9.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/Users/pascalleclercq/git/gcupload-maven-plugin/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2011. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/pascalleclercq/git/gcupload-maven-plugin/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Google Code Upload Maven Plugin 1.0.1-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'Google Code Upload Maven Plugin 1.0.1-SNAPSHOT API'
